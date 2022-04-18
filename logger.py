@@ -36,7 +36,7 @@ class Log(object):
         Level 3(Not recommended):
             Logs everything to Files. Can become cumbersome if lots of logging is done.
     """
-    def __init__(self, name:str, Level:int=None, LogPath:str=None):
+    def __init__(self, Name:str, Level:int=None, LogPath:str=None):
         #Enable/Disable the logger
         self.enabled = True
 
