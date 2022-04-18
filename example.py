@@ -1,7 +1,7 @@
 from logger import Log
 
 my_log = Log(Name="My App")
-my_log.log_info("Hello world!")
+my_log.log_ok("Hello world!")
 
 x = 20
 if x > 21:
