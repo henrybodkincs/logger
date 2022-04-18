@@ -1,7 +1,5 @@
 # logger
-Light and easy to use python logger with sys.stdout and file support(coming).
-
-<p>This logger is based off Python's own <code>logger</code> library and supports some basic input/output formatting and printing for quickly testing whether other things(your code) work as intended or not.</p>
+Preconfigured lightweight logger for python3 using Python's native <code>logger</code> library with standard terminal output and file output(coming soon TM). Useful for when setting up a whole <code>logger.Logging()</code> instance is too much work.
 
 <h2>Installation and Usage:</h2>
 <ul>
