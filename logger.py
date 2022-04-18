@@ -68,7 +68,7 @@ class Log:
         self.save_error = False
 
         if LogPath is None:
-            Level = None #set level to None since no filepath will be written to.
+            Level = 0 #set level to None since no filepath will be written to.
             self.warning_to_terminal(Message=f"Log path was not specified/found. Log file will not be set for {self.name}.")
         else:
             if path.isfile(LogPath):
@@ -81,7 +81,7 @@ class Log:
                 #self.logger.addHandler(file_handler)
                 self.ok_to_terminal(Message=f"Log file will be set to: {self.LogPath}")
             else:
-                Level = None
+                Level = 0 #do not try to save anything if the file is set.
                 self.warning_to_terminal(Message=f"Specified file was not found. Log file will not be set for {self.name}")
 
         if Level is not None and (Level >= 0 and Level <= 3):
@@ -91,7 +91,7 @@ class Log:
             elif self.level == 2:
                 self.save_error = True
                 self.save_warning = True
-            elif self.level == 3 or self.Level == 4:
+            elif self.level == 3 or self.level == 4:
                 self.save_ok = True
                 self.save_info = True
                 self.save_warning = True
@@ -130,17 +130,19 @@ class Log:
 
         self.count += 1
 
-    def log_to_file(self, Header:str, Message:str, FilePath:str):
+    def log_to_file(self, Level:int, Message:str):
         """ TODO """
-        pass
+        self.logger.log(level=Level, msg=Message)
 
     def info_to_file(self, Message:str):
         """ TODO """
-        header = "INFO"
+        level = 10
+        self.log_to_file(Level=level, Message=Message)
 
 
     def ok_to_file(self, Message:str):
         """ TODO """
+        level = 10
         header = "OK"
         #header = "OK"
         #self.log_to_file(Header=header, Message=Message, File=self.LogPath)
