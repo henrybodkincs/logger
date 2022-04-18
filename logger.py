@@ -17,6 +17,11 @@ class Styles:
     BOLD = "\033[1m"
     UNDERLINE = "\033[4m"
 
+class CountFilter(logging.Filter):
+    """ This count filter is applied to the logger for displaying messages correctly. """
+    def filter(self, record):
+        record.count = counter
+        return True
 
 class Log:
     """ Logging class for managing the formatting, storage and output of logs.
@@ -49,11 +54,13 @@ class Log:
         #Enable/Disable the logger
         self.enabled = True
         self.name = Name
-        #logging.basicConfig()
-        self.logger = logging.getLogger(self.name)
-        formatter = logging.Formatter("[%(levelname)s] [%(asctime)s] [%(name)s] - %(message)s", "%F")
 
-        self.log_count = 0
+        logging.basicConfig()
+        self.logger = logging.getLogger(self.name)
+        formatter = logging.Formatter("[%(levelname)s] [%(name)s - %(count)s] [%(asctime)s] - %(message)s", "%F")
+        self.logger.addFilter(CountFilter())
+        self.count = 0
+
         #flags set to save specific logging-types to a file.
         self.save_ok = False
         self.save_info = False
@@ -108,20 +115,20 @@ class Log:
         if Header is None:
             Header = "LOG"
         if Color is None and Style is None:
-            print(f"[{Header}] [{self.name} - {self.log_count}]: {current_time} - {Message}")
+            print(f"[{Header}] [{self.name} - {self.count}]: {current_time} - {Message}")
         else:
         #pass formatting appropiately:
             if Color is not None and Style is not None:
                 #color and style
-                print(f"[{Color}{Style}{Header}{Colors.ENDC}] [{self.name} - {self.log_count}] [{current_time}] - {Message}")
+                print(f"[{Color}{Style}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
             elif Color is not None and Style is None:
                 #only color
-                print(f"[{Color}{Header}{Colors.ENDC}] [{self.name} - {self.log_count}] [{current_time}] - {Message}")
+                print(f"[{Color}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
             else:
                 #only style
-                print(f"[{Style}{Header}{Colors.ENDC}] [{self.name} - {self.log_count}] [{current_time}] - {Message}")
+                print(f"[{Style}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
 
-        self.log_count += 1
+        self.count += 1
 
     def log_to_file(self, Header:str, Message:str, FilePath:str):
         """ TODO """
