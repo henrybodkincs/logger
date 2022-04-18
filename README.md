@@ -21,15 +21,14 @@ Preconfigured lightweight logger for python3 using Python's native <code>logger<
 from logger import Log
 
 my_log = Log(Name="My App")
-my_log.log_info("Hello world!")
+my_log.ok("Hello world!")
 
 x = 20
 if x > 21:
-  my_log.log_ok("X is greater than 21")
+    my_log.ok("X is greater than 21")
 else:
-  my_log.log_error("The math is wrong")
-
-my_log.log_warning("Done.")
+    my_log.error("The math is wrong")
+my_log.warning("Done.")
 ```
 
 Running <code>example.py</code>(shown above) displays the following:
