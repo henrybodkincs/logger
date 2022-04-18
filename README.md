@@ -1,5 +1,5 @@
 # logger
-Light and easy to use python logger with sys.stdout and file support.
+Light and easy to use python logger with sys.stdout and file support(coming).
 
 <p>This logger is based off Python's own <code>logger</code> library and supports some basic input/output formatting and printing for quickly testing whether other things(your code) work as intended or not.</p>
 
