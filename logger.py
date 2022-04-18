@@ -71,7 +71,7 @@ class Log(object):
                     self.save_info = True
                     self.save_warning = True
                     self.save_error = True
-            self.log_ok_to_terminal(Message=f"Log level set to: {self.level}")
+            self.log_info_to_terminal(Message=f"Log level set to: {self.level}")
         else:
             self.level = 0
             self.log_error_to_terminal(Message=f"Log level out of bounds: {self.level}")
@@ -84,7 +84,7 @@ class Log(object):
                 self.log_warning_to_terminal(Message=f"Log path was not specified/found. Log file will not be set for {self.name}")
 
 
-            self.log_ok_to_terminal(Message=f"Sucessfuly started logging instance for: {self.name}")
+            self.log_info_to_terminal(Message=f"Sucessfuly started logging instance for: {self.name}")
 
     def get_current_time(self):
         return datetime.now().time()
