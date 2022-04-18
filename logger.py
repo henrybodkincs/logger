@@ -36,12 +36,19 @@ class Log(object):
         Level 3(Not recommended):
             Logs everything to Files. Can become cumbersome if lots of logging is done.
     """
+    def __enter__(self):
+        self.log_ok("Entering logger.")
+        return self
+
+    def __exit__(self):
+        self.log_ok("Closing logger.")
+
     def __init__(self, Name:str, Level:int=None, LogPath:str=None):
         #Enable/Disable the logger
         self.enabled = True
 
         #name of the logger
-        self.name = name
+        self.name = Name
         #Current count of the logger instance
         self.log_count = 0
         #flags set to save specific logging-types to a file.
