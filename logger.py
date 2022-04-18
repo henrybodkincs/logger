@@ -37,11 +37,11 @@ class Log(object):
             Logs everything to Files. Can become cumbersome if lots of logging is done.
     """
     def __enter__(self):
-        self.log_ok("Entering logger.")
+        self.log_info("Opening logger.")
         return self
 
-    def __exit__(self):
-        self.log_ok("Closing logger.")
+    def __exit__(self, *args):
+        self.log_info("Closing logger.")
 
     def __init__(self, Name:str, Level:int=None, LogPath:str=None):
         #Enable/Disable the logger
