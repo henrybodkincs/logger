@@ -1,5 +1,5 @@
 <ol>
     <li>
-        <p>Add file logging support</p>
+        <p>disable printing to stdout when using logging.log()</p>
     </li>
 </ol>
