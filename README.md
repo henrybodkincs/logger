@@ -15,7 +15,7 @@ An easy-to-deploy file/terminal logger class for python3 using Python's native <
   </li>
 </ul>
 <h2>Installation</h2>
-<ul>
+<ol>
   <li><p><code>git clone https://github.com/henryriveraCS/logger</code></p></li>
   <li>
     <p>
@@ -24,14 +24,12 @@ An easy-to-deploy file/terminal logger class for python3 using Python's native <
   </li>
   <li>
     <p>
-      Intallation is done :^)
+      Because we don't use any third party libraries the installation is done :^)
     </p>
   </li>
-</ul>
-<br>
+</ol>
 
 <h2>Usage</h2>
-<h3>Setup</h3>
 
 ```python
 """ Example from example/example.py """
