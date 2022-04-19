@@ -42,7 +42,7 @@ app_log.info("Starting script.")
 someValue = True
 if someValue:
   app_log.ok("Value passed")
-  else:
+else:
     app_log.error("Value failed")
 app_log.info("Script is done.")
 ```
