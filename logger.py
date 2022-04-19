@@ -17,12 +17,6 @@ class Styles:
     BOLD = "\033[1m"
     UNDERLINE = "\033[4m"
 
-class CountFilter(logging.Filter):
-    """ This count filter is applied to the logger for displaying messages correctly. """
-    def filter(self, record):
-        record.count = counter
-        return True
-
 class Log:
     """ Logging class for managing the formatting, storage and output of logs.
 
@@ -33,13 +27,13 @@ class Log:
         [OK] = raised when a process executed as expected (good for tests!)
 
     Logging Levels:
-        Level 0/1:
-            Logs all messages to Terminal.
+        Level 0:
+            Logs everything to the Terminal.
+        Level 1:
+            Logs ERROR to Files. Logs WARNING/INFO/OK messages to Terminal.
         Level 2:
-            Logs ERROR to Files. Logs WARNING/INFO/OK to Terminal.
-        Level 3:
             Logs ERROR/WARNING to Files. - Logs INFO/OK to Terminal.
-        Level 4/5:
+        Level 3:
             Logs everything to Files.
     """
     def __enter__(self):
@@ -50,39 +44,32 @@ class Log:
         self.info("Closing logger.")
         #self.logger.close()
 
-    def __init__(self, Name:str, Level:int=None, LogPath:str=None):
+    def __init__(self, Name:str, Level:int=None, FilePath:str=None):
+        self.log_count = 0
+
         #Enable/Disable the logger
         self.enabled = True
         self.name = Name
-
         logging.basicConfig()
         self.logger = logging.getLogger(self.name)
-        formatter = logging.Formatter("[%(levelname)s] [%(name)s - %(count)s] [%(asctime)s] - %(message)s", "%F")
-        self.logger.addFilter(CountFilter())
-        self.count = 0
-
         #flags set to save specific logging-types to a file.
         self.save_ok = False
         self.save_info = False
         self.save_warning = False
         self.save_error = False
 
-        if LogPath is None:
+        if FilePath is None:
             Level = 0 #set level to None since no filepath will be written to.
-            self.warning_to_terminal(Message=f"Log path was not specified/found. Log file will not be set for {self.name}.")
+            self.warning(Message=f"Log path was not specified/found. Log file will not be set for {self.name}.")
         else:
-            if path.isfile(LogPath):
-                self.log_path = LogPath
-                file_handler = logging.FileHandler(
-                        filename=self.log_path,
-                        mode="a",
-                        encoding="utf-8"
-                        )
-                #self.logger.addHandler(file_handler)
-                self.ok_to_terminal(Message=f"Log file will be set to: {self.LogPath}")
+            if path.isfile(FilePath):
+                if self.set_log_file(FilePath):
+                    self.info(Message=f"Log file has been set.")
+                else:
+                    self.error(Message=f"Log file was unable to be configured properly. Please make sure the log file exists.")
             else:
                 Level = 0 #do not try to save anything if the file is set.
-                self.warning_to_terminal(Message=f"Specified file was not found. Log file will not be set for {self.name}")
+                self.warning(Message=f"Specified file was not found. Log file will not be set for {self.name}")
 
         if Level is not None and (Level >= 0 and Level <= 3):
             self.level = Level
@@ -100,44 +87,67 @@ class Log:
             #DEBUG since this class will handle whether a file goes to
             #terminal or file.
             self.logger.setLevel(10)
-            self.info_to_terminal(Message=f"Log level set to: {self.level}")
+            self.info(Message=f"Log level set to: {self.level}")
         else:
             self.level = 0
-            self.error_to_terminal(Message=f"Log level out of bounds: {self.level}")
+            self.error(Message=f"Log level out of bounds: {self.level}")
 
-        self.info_to_terminal(Message=f"Sucessfuly started logging instance for: {self.name}")
+        self.info(Message=f"Sucessfuly started logging instance for: {self.name}")
+
 
     def get_current_time(self):
         return datetime.now().time()
+
+
+    def set_log_file(self, FilePath:str):
+        if path.isfile(FilePath):
+            file_handler = logging.FileHandler(
+                    filename=FilePath,
+                    mode="a",
+                    encoding="utf-8"
+                    )
+            formatter = logging.Formatter("%(message)s")
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
+            return True
+        return False
+
 
     def log_to_terminal(self, Message:str, Header:str=None, Color:str=None, Style:str=None):
         current_time = self.get_current_time()
         if Header is None:
             Header = "LOG"
         if Color is None and Style is None:
-            print(f"[{Header}] [{self.name} - {self.count}]: {current_time} - {Message}")
+            print(f"[{Header}] [{self.name} - {self.log_count}]: {current_time} - {Message}")
         else:
         #pass formatting appropiately:
             if Color is not None and Style is not None:
                 #color and style
-                print(f"[{Color}{Style}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
+                print(f"[{current_time}] [{Color}{Style}{Header}{Colors.ENDC}] [{self.name}] [{self.log_count}] - {Message}")
             elif Color is not None and Style is None:
                 #only color
-                print(f"[{Color}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
+                print(f"[{current_time}] [{Color}{Header}{Colors.ENDC}] [{self.name}] [{self.log_count}] - {Message}")
             else:
                 #only style
-                print(f"[{Style}{Header}{Colors.ENDC}] [{self.name} - {self.count}] [{current_time}] - {Message}")
+                print(f"[{current_time}] [{Style}{Header}{Colors.ENDC}] [{self.name}] [{self.log_count}] - {Message}")
 
-        self.count += 1
+        self.log_count += 1
 
-    def log_to_file(self, Level:int, Message:str):
-        """ TODO """
-        self.logger.log(level=Level, msg=Message)
+
+    def log_to_file(self, Header:str, Level:int, Message:str):
+        """ Logs the specific message into the log file(assuming the file path was set and the logger is enabled."""
+        current_time = self.get_current_time()
+        if Header is None:
+            Header = "LOG"
+        formatted_msg = f"[{current_time}] [{Header}] [{self.name}] [{self.log_count}] - {Message}"
+        self.logger.log(level=10, msg=formatted_msg)
+        self.log_count += 1
 
     def info_to_file(self, Message:str):
         """ TODO """
         level = 10
-        self.log_to_file(Level=level, Message=Message)
+        header = "INFO"
+        self.log_to_file(Header=header, Level=level, Message=Message)
 
 
     def ok_to_file(self, Message:str):
@@ -145,16 +155,18 @@ class Log:
         level = 10
         header = "OK"
         #header = "OK"
-        #self.log_to_file(Header=header, Message=Message, File=self.LogPath)
+        self.log_to_file(Header=header, Level=level, Message=Message)
     
     def warning_to_file(self, Message:str):
         header = "WARNING"
-        pass
+        level = 10
+        self.log_to_file(Header=header, Level=level, Message=Message)
 
 
-    def error_to_warning(self, Message:str):
+    def error_to_file(self, Message:str):
         header = "ERROR"
-        pass
+        level = 10
+        self.log_to_file(Header=header, Level=level, Message=Message)
 
 
     def warning_to_terminal(self, Message:str):
