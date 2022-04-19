@@ -78,7 +78,7 @@ class Log:
             elif self.level == 2:
                 self.save_error = True
                 self.save_warning = True
-            elif self.level == 3 or self.level == 4:
+            elif self.level == 3:
                 self.save_ok = True
                 self.save_info = True
                 self.save_warning = True
