@@ -32,4 +32,9 @@ my_log.warning("Done.")
 ```
 
 Running <code>example.py</code>(shown above) displays the following:
-![Image of example.py logger results](https://github.com/henryriveraCS/logger/blob/main/log_img.png)
+Terminal output:
+
+![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/terminal_output.png)
+File output:
+
+![Image of example.py logger results for the file](https://github.com/henryriveraCS/logger/blob/main/file_output.png)
