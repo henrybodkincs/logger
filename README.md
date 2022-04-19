@@ -1,5 +1,5 @@
 # logger
-Preconfigured lightweight logger for python3 using Python's native <code>logger</code> library with standard terminal output and file output(coming soon TM). Useful for when setting up a whole <code>logger.Logging()</code> instance is too much work.
+Preconfigured easy to deploy file/terminal logger for python3 using Python's native <code>logger</code> library. Useful for when setting up a whole <code>logger.Logging()</code> instance is too much work for scripts/applications.
 
 <h2>Installation and Usage:</h2>
 <ul>
