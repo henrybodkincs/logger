@@ -33,7 +33,7 @@ app_log.info("Script is done.")
 Running <code>example.py</code>(shown above) displays the following:
 Terminal output:
 
-![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/terminal_output.png)
+![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/images/terminal_output.png)
 File output:
 
-![Image of example.py logger results for the file](https://github.com/henryriveraCS/logger/blob/main/file_output.png)
+![Image of example.py logger results for the file](https://github.com/henryriveraCS/logger/blob/main/images/file_output.png)
