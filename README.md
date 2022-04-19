@@ -4,10 +4,8 @@ An easy-to-deploy file/terminal logger class for python3 using Python's native <
 <h2>Features</h2>
 <ul>
   <li>Has a basic built-in logging style: [DATETIME] [LEVEL] [LOG NAME] [LOG COUNT] - [MESSAGE]</li>
-  <li>Logs message to terminal</li>
-  <li>Log to a specfic file at runtime</li>
   <li>supports python's built-in <code>with()</code> statement</li>
-  <li>Has prebuilt options for some common use-cases such as:
+  <li>Can figure out whether to log a specific message to a file or log based off the Level configured such as:
       <ul>
         <li>Level 0/None - Log everything to the terminal.</li>
         <li>Level 1 - Log errors to a file. Log warnings and info to terminal.</li>
