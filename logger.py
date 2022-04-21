@@ -94,6 +94,17 @@ class Log:
 
         self.info(Message=f"Sucessfuly started logging instance for: {self.name}")
 
+    def disable(self):
+        """ Disables all logging. """
+        self.enabled = False
+        self.logger.disabled = True #just in case
+
+
+    def enable(self):
+        """ Enables all logging """
+        self.enabled = True
+        self.logger.disabled = False #just in case
+
 
     def get_current_time(self):
         return datetime.now().time()
