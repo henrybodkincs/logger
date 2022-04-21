@@ -33,6 +33,7 @@ An easy-to-deploy file/terminal logger class for python3 using Python's native <
 
 ```python
 """ Example from example/example.py """
+from logger import Log
 #Prints everything to the terminal
 app_log = Log(Name="My App")
 #This app_log would print all WARNING/ERROR messages to a file log and print out INFO/OK to the termminal
