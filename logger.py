@@ -69,7 +69,7 @@ class Log:
                     self.error(Message=f"Log file was unable to be configured properly. Please make sure the log file exists.")
             else:
                 Level = 0 #do not try to save anything if the file is set.
-                self.warning(Message=f"Specified file was not found. Log file will not be set for {self.name}")
+                self.error(Message=f"Specified file was not found. Log file will not be set for {self.name}")
 
         if Level is not None and (Level >= 0 and Level <= 3):
             self.level = Level
@@ -86,7 +86,7 @@ class Log:
             #logger level always set to
             #DEBUG since this class will handle whether a file goes to
             #terminal or file.
-            self.logger.setLevel(10)
+            self.logger.setLevel(level=logging.DEBUG)
             self.info(Message=f"Log level set to: {self.level}")
         else:
             self.level = 0
@@ -151,7 +151,9 @@ class Log:
         if Header is None:
             Header = "LOG"
         formatted_msg = f"[{current_time}] [{Header}] [{self.name}] [{self.log_count}] - {Message}"
-        self.logger.log(level=10, msg=formatted_msg)
+        self.logger.propagate = False
+        self.logger.log(level=logging.DEBUG, msg=formatted_msg)
+        self.logger.propagate = True
         self.log_count += 1
 
     def info_to_file(self, Message:str):
