@@ -2,11 +2,11 @@
 
 [![logger.py Build Tests](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml/badge.svg?branch=master&event=push)](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml)
 
-An easy-to-deploy file/terminal logger class for python3 using Python's native <code>logger</code> library. Useful for when setting up a whole <code>logger.Logging()</code> instance is too much work for scripts/applications.
+An easy-to-use logger class that can intelligently handle pushing stdout messages between files/terminals based off configured options. Extremely useful for setting up a whole <code>logger.Logging()</code> instance without worrying about configuring format/file-handling for scripts/applications.
 
 <h2>Features</h2>
 <ul>
-  <li>Has a basic built-in logging style: [DATETIME] [LEVEL] [LOG NAME] [LOG COUNT] - [MESSAGE]</li>
+  <li>Has a basic built-in logging style: [DATE TIME] [LEVEL] [LOG NAME] [LOG COUNT] - [MESSAGE]</li>
   <li>supports python's built-in <code>with()</code> statement</li>
   <li>Can figure out whether to log a specific message to a file or log based off the Level configured such as:
       <ul>
@@ -22,7 +22,7 @@ An easy-to-deploy file/terminal logger class for python3 using Python's native <
   <li><p><code>git clone https://github.com/henryriveraCS/logger</code></p></li>
   <li>
     <p>
-      Move <code>logger.py</code> into your project directory
+      Move <code>logger/logger.py</code> into your project directory
     </p>
   </li>
   <li>
