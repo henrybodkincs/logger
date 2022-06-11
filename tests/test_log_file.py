@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
         self.assertEqual(log.enabled, True)
 
     #Test that disabling the logger will not output any statements or increase log_count
-    def test_disable_messages(self):
+    def test_disabled_messages(self):
         log = logger.Log(Name=log_name)
         log.disable()
         log.log_count = 0
@@ -49,18 +49,19 @@ class Test(unittest.TestCase):
     def test_enabled_messages(self):
         log = logger.Log(Name=log_name)
         log.log_count = 0
-        self.assertEqual(log.ok("test"), None)
+        self.assertEqual(log.ok("Testing OK"), None)
         self.assertEqual(log.log_count, 1)
-        self.assertEqual(log.info("test"), None)
+        self.assertEqual(log.info("Testing INFO"), None)
         self.assertEqual(log.log_count, 2)
-        self.assertEqual(log.warning("test"), None)
+        self.assertEqual(log.warning("Testing WARNING"), None)
         self.assertEqual(log.log_count, 3)
-        self.assertEqual(log.error("test"), None)
+        self.assertEqual(log.error("Testing ERROR"), None)
         self.assertEqual(log.log_count, 4)
 
 
     def test_set_log_file(self):
         log = logger.Log(Name=log_name)
+        log.disable()
         self.assertEqual(log.set_log_file(log_path), True)
         self.assertEqual(log.file_path, log_path)
         log = logger.Log(Name=log_name, FilePath=log_path)
@@ -71,6 +72,7 @@ class Test(unittest.TestCase):
     def test_save_to_file(self):
         log = logger.Log(Name=log_name)
     """
+
     def test_set_log_level(self):
         log = logger.Log(Name=log_name, Level=0)
         log.disable()
