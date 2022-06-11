@@ -108,7 +108,8 @@ class Log:
 
 
     def get_current_time(self):
-        return datetime.now().time()
+        return datetime.today()
+
 
     def set_log_level(self, Level:int):
         """
