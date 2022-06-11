@@ -121,7 +121,7 @@ class Log:
             self.error("Level must be an int() type. Please specify a valid log level.")
             return False
         if Level > 0 and self.file_path is None:
-            self.error("No FilePath has been specified for this level. Please use set_log_file(FilePath) to set a file path then call this function.")
+            self.error("No FilePath has been specified for this log. Please use set_log_file(FilePath) to set a file path then call this function.")
             return False
 
         #executes exception when level is set to something other than an int/exists
