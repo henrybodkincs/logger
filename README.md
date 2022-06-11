@@ -1,4 +1,7 @@
 # logger
+
+[![logger.py Build Tests](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml/badge.svg?branch=master&event=push)](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml)
+
 An easy-to-deploy file/terminal logger class for python3 using Python's native <code>logger</code> library. Useful for when setting up a whole <code>logger.Logging()</code> instance is too much work for scripts/applications.
 
 <h2>Features</h2>
