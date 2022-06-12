@@ -108,16 +108,10 @@ class Log:
             as it will correctly update your flags for writing to files.
         """
         if not isinstance(Level, int):
-            self.error("Level must be an int() type. Please specify a valid log level.")
             return False
         if Level > 0 and self.file_path is None:
             self.error("No FilePath has been specified for this log. Please use set_log_file(FilePath) to set a file path then call this function.")
 
-        #executes exception when level is set to something other than an int/exists
-        if self.level == Level:
-            self.warning(f"The specified level {Level} is already chosen. Please refer to the documentation/source code for more details on the available levels.")
-
-        
         if Level >= 0 and Level <= 3:
             #reset the save flags 
             self.save_ok = False
@@ -138,7 +132,7 @@ class Log:
 
             #logger level will always be set to DEBUG since
             #the class itself will handle whether a file goes to terminal or file.
-            self.info(f"Log level successfully set to {self.level}.")
+            self.info(f"Log level set to {self.level}.")
             return True
         else:
             self.warning(f"Specified level {Level} is not a valid range. Please refer to the documentation for more details.")

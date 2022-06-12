@@ -66,13 +66,11 @@ class TestLogging:
     """
     def test_save_to_file(self, caplog):
         msg = "Testing test_save_to_file"
-        log = logger.Log(Name=log_name, Level=3, FilePath=log_path)
-        with caplog.at_level(logging.DEBUG, logger=log.logger.name):
-            log.ok(msg)
-            log.error(msg)
-            assert caplog.records != []
-            for record in caplog.records:
-                assert msg in record.text 
+        log = logger.Log(Name=log_name, Level=2, FilePath=log_path)
+        log.error(msg)
+        logging.getLogger()
+        assert caplog.records != []
+        assert msg in caplog.text
     """
 
     def test_set_log_level(self):
