@@ -63,8 +63,8 @@ class Log:
 
     def __init__(self, Name:str, Level:int=None, FilePath:str=None):
         self.log_count = 0
+        self.level = 0
         self.file_path = None
-        self.level = None
 
         #flags for logging
         self.save_ok = False
@@ -75,25 +75,14 @@ class Log:
         #Enable/Disable the logger
         self.enabled = True
         self.name = Name
-        logging.basicConfig()
+        #logging.basicConfig()
         self.logger = logging.getLogger(self.name)
         
         self.log_file_worked = False
         self.log_level_worked = False
 
-        if FilePath is not None:
-            self.log_file_worked = self.set_log_file(FilePath)
-        else:
-            self.log_file_worked = True
-
-        if Level is None or isinstance(Level, int) is False:
-            Level = 0
+        self.log_file_worked = self.set_log_file(FilePath)
         self.log_level_worked = self.set_log_level(Level)
-
-        if self.log_level_worked and self.log_file_worked:
-            self.info(Message=f"Sucessfuly started logging instance.")
-        else:
-            self.error(Message=f"Error occurred while initializing logging instance.")
 
     def disable(self):
         """ Disables all logging. """
@@ -123,20 +112,18 @@ class Log:
             return False
         if Level > 0 and self.file_path is None:
             self.error("No FilePath has been specified for this log. Please use set_log_file(FilePath) to set a file path then call this function.")
-            return False
 
         #executes exception when level is set to something other than an int/exists
-        if self.level is not None and self.level == Level:
+        if self.level == Level:
             self.warning(f"The specified level {Level} is already chosen. Please refer to the documentation/source code for more details on the available levels.")
-            return False
-        tmp = self.level
-        #reset the save flags 
-        self.save_ok = False
-        self.save_info = False
-        self.save_warning = False
-        self.save_error = False
 
+        
         if Level >= 0 and Level <= 3:
+            #reset the save flags 
+            self.save_ok = False
+            self.save_info = False
+            self.save_warning = False
+            self.save_error = False
             self.level = Level
             if self.level == 1:
                 self.save_error = True
@@ -151,7 +138,6 @@ class Log:
 
             #logger level will always be set to DEBUG since
             #the class itself will handle whether a file goes to terminal or file.
-            self.logger.setLevel(level=logging.DEBUG)
             self.info(f"Log level successfully set to {self.level}.")
             return True
         else:
@@ -162,18 +148,16 @@ class Log:
         try:
             if FilePath is None:
                 self.warning(f"No file path has been specified for this log.")
-                return False
-            if path.isfile(FilePath):
+            elif path.isfile(FilePath):
                 file_handler = logging.FileHandler(
                         filename=FilePath,
                         mode="a",
                         encoding="utf-8"
                         )
-                formatter = logging.Formatter("%(message)s")
-                file_handler.setFormatter(formatter)
                 self.logger.addHandler(file_handler)
                 self.file_path = FilePath
-                self.ok(f"Successfully set file path for logger to: {FilePath}")
+                self.logger.setLevel(level=logging.DEBUG)
+                self.ok(f"Pointing to new file path for logger: {FilePath}")
                 return True
             else:
                 self.error(f"The specified file path is not an existing file. Please create it to set the new log path.")
@@ -210,7 +194,7 @@ class Log:
             Header = "LOG"
         formatted_msg = f"[{current_time}] [{Header}] [{self.name}] [{self.log_count}] - {Message}"
         self.logger.propagate = False
-        self.logger.log(level=logging.DEBUG, msg=formatted_msg)
+        self.logger.log(level=logging.CRITICAL, msg=formatted_msg)
         self.logger.propagate = True
         self.log_count += 1
 
