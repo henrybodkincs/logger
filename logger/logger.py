@@ -81,8 +81,8 @@ class Log:
         self.log_file_worked = False
         self.log_level_worked = False
 
-        self.log_file_worked = self.set_log_file(FilePath)
-        self.log_level_worked = self.set_log_level(Level)
+        self.log_file_set = self.set_log_file(FilePath)
+        self.log_level_set = self.set_log_level(Level)
 
     def disable(self):
         """ Disables all logging. """

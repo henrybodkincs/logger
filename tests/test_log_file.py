@@ -15,6 +15,8 @@ class TestLogging:
         assert log.save_ok is False
         assert log.save_info is False
         assert log.file_path is None
+        assert log.log_file_set is False
+        assert log.log_level_set is False
         assert log.enabled is True
         assert log.level == 0
 
