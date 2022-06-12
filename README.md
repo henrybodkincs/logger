@@ -1,6 +1,6 @@
 # logger
 
-[![logger.py Build Tests](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml/badge.svg?branch=master&event=push)](https://github.com/henryriveraCS/private-github-actions/actions/workflows/run-tests.yaml)
+[![Tests](https://github.com/henryriveraCS/logger/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/henryriveraCS/logger/actions/workflows/run-tests.yaml)
 
 An easy-to-use logger class that can intelligently handle pushing stdout messages between files/terminals based off configured options. Extremely useful for setting up a whole <code>logger.Logging()</code> instance without worrying about configuring format/file-handling for scripts/applications.
 
