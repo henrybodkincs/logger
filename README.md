@@ -11,9 +11,10 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
   <li>Can figure out whether to log a specific message to a file or log based off the Level configured such as:
       <ul>
         <li>Level 0/None - Log everything to the terminal.</li>
-        <li>Level 1 - Log errors to a file. Log warnings and info to terminal.</li>
-        <li>Level 2 - Log errors/warnings to a file. Log INFO/OK to the terminal</li>
-        <li>Level 3 - Log everything into a file</li>
+        <li>Level 1 - Log critical to file. Log warnings/ok/info to terminal.</li>
+        <li>Level 2 - Log critical/error to file. Log warnings/info/ok to terminal.</li>
+        <li>Level 3 - Log errors/warnings to file. Log INFO/OK  the terminal</li>
+        <li>Level 4 - Log everything into file</li>
       </ul>
   </li>
 </ul>
