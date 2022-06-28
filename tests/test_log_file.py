@@ -83,7 +83,10 @@ class TestLogging:
         assert log.save_ok is False
         assert log.save_error is False
         assert log.save_warning is False
+        #check error when trying to set log level above 0 without file_path set.
+        assert log.set_log_level(1) is False
         # test 1 flags
+        assert log.set_log_file("test_log.log") is True
         assert log.set_log_level(1) is True
         assert log.level == 1
         assert log.save_critical is True
