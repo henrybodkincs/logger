@@ -17,7 +17,8 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
         <li>Level 4 - Log everything into file</li>
       </ul>
   </li>
-  <li>Dynamically switch log levels and logging files with <code>set_log_file()</code> and <code>set_log_level()</code></li> respectively.
+  <li>Dynamically switch log levels and logging files with <code>set_log_file()</code> and <code>set_log_level()</code> respectively.</li>
+  <li>Enable/Disable logging as needed.</li>
   
 </ul>
 <h2>Installation</h2>
