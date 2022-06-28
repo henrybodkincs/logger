@@ -1,23 +1,17 @@
 from logger import Log
+items = ["item1", "item2", "item3", "item4", "item5"]
 
-def basic_example():
-    app_log = Log(Name="My App")
+my_logger = Log(Name="My Logger")
 
-    app_log.ok("Starting script.")
-
-    someValue = True
-    if someValue:
-        app_log.ok("Value passed")
-    else:
-        app_log.error("Value failed")
-    app_log.info("Script is done.")
+my_logger.info(items[0])
+my_logger.ok(items[1])
+my_logger.warning(items[2])
+my_logger.error(items[3])
+my_logger.critical(items[4])
 
 
-def with_example():
-    with Log(Name="Admin Log", Level=3, FilePath="example.log") as admin_log:
-        admin_log.info("This will be stored to the example.log file")
-
-
-
-basic_example()
-with_example()
+# pointing logger to example.log with log level set to 2
+my_logger.set_log_file("example.log")
+my_logger.set_log_level(2)
+my_logger.ok("Test OK")
+my_logger.error("Test Error")

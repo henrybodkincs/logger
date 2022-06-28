@@ -1,5 +1,1 @@
-[16:37:49.969642] [INFO] [Admin Log] [1] - Log level set to: 3
-[16:37:49.969756] [INFO] [Admin Log] [2] - Sucessfuly started logging instance for: Admin Log
-[16:37:49.969812] [INFO] [Admin Log] [3] - Opening logger.
-[16:37:49.969857] [INFO] [Admin Log] [4] - This will be stored to the example.log file
-[16:37:49.969898] [INFO] [Admin Log] [5] - Closing logger.
+[2022-06-27 21:35:14.393886] [ERROR] [My Logger] [9] - Test Error
