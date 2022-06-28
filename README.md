@@ -6,7 +6,7 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
 
 <h2>Features</h2>
 <ul>
-  <li>Has a basic built-in logging style: [DATE TIME] [LEVEL] [LOG NAME] [LOG COUNT] - [MESSAGE]</li>
+  <li>Has a built-in logging style: [DATE TIME] [LEVEL] [LOG NAME] [LOG COUNT] - [MESSAGE]</li>
   <li>supports python's built-in <code>with()</code> statement</li>
   <li>Can figure out whether to log a specific message to a file or log based off the Level configured such as:
       <ul>
@@ -17,6 +17,8 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
         <li>Level 4 - Log everything into file</li>
       </ul>
   </li>
+  <li>Dynamically switch log levels and logging files with <code>set_log_file()</code> and <code>set_log_level()</code></li> respectively.
+  
 </ul>
 <h2>Installation</h2>
 <ol>
@@ -36,23 +38,31 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
 <h2>Usage</h2>
 
 ```python
-""" Example from example/example.py """
+#python3
 from logger import Log
-#Prints everything to the terminal
-app_log = Log(Name="My App")
-#This app_log would print all WARNING/ERROR messages to a file log and print out INFO/OK to the termminal
-#app_log = Log(Name="Other App", Level=2, FilePath="path/to/example.log") 
-app_log.info("Starting script.")
+items = ["item1", "item2", "item3", "item4", "item5"]
 
-someValue = True
-if someValue:
-  app_log.ok("Value passed")
-else:
-    app_log.error("Value failed")
-app_log.info("Script is done.")
+my_logger = Log(Name="My Logger")
+
+my_logger.info(items[0])
+my_logger.ok(items[1])
+my_logger.warning(items[2])
+my_logger.error(items[3])
+my_logger.critical(items[4])
+
+# pointing logger to example.log with log level set to 2
+my_logger.set_log_file("example.log")
+my_logger.set_log_level(2)
+my_logger.ok("Test OK")
+my_logger.error("Test Error")
 ```
 
 
-<h3>Output</h3>
+Results from running example.py under the <code>example/</code> folder
+<h3>Terminal:</h3>
 
-![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/images/terminal_output.png)
+![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/images/example.png)
+
+<h3>File:</h3>
+
+![Image of example.py logger results for the terminal](https://github.com/henryriveraCS/logger/blob/main/images/example2.png)
