@@ -1,5 +1,5 @@
 import logging
-
+from typing import Optional
 from datetime import datetime
 from os import path
 
@@ -76,20 +76,20 @@ class Log:
         self.set_log_file(FilePath)
         self.set_log_level(Level)
 
-    def disable(self):
+    def disable(self) -> None:
         """Disables all logging."""
         self.enabled = False
         self.logger.disabled = True
 
-    def enable(self):
+    def enable(self) -> None:
         """Enables all logging"""
         self.enabled = True
         self.logger.disabled = False
 
-    def get_current_time(self):
+    def get_current_time(self) -> datetime:
         return datetime.today()
 
-    def set_log_level(self, Level: int):
+    def set_log_level(self, Level: int) -> bool:
         """
         Updates the logging level if it is in range and sets the flags for
         logging into a file or terminal based off the new value.
@@ -138,7 +138,7 @@ class Log:
             )
             return False
 
-    def set_log_file(self, FilePath: str):
+    def set_log_file(self, FilePath: str) -> bool:
         try:
             if FilePath is None:
                 self.warning(f"No file path has been specified for this log.")
@@ -161,7 +161,7 @@ class Log:
 
     def log_to_terminal(
         self, Message: str, Header: str = None, Color: str = None, Style: str = None
-    ):
+    ) -> None:
         current_time = self.get_current_time()
         if Header is None:
             Header = "LOG"
@@ -189,7 +189,7 @@ class Log:
 
         self.log_count += 1
 
-    def log_to_file(self, Header: str, Level: int, Message: str):
+    def log_to_file(self, Header: str, Level: int, Message: str) -> None:
         """Logs the specific message into the log file(assuming the file path was set and the logger is enabled."""
         current_time = self.get_current_time()
         if Header is None:
@@ -202,62 +202,62 @@ class Log:
         self.logger.propagate = True
         self.log_count += 1
 
-    def info_to_file(self, Message: str):
+    def info_to_file(self, Message: str) -> None:
         level = logging.DEBUG
         header = "INFO"
         self.log_to_file(Header=header, Level=level, Message=Message)
 
-    def ok_to_file(self, Message: str):
+    def ok_to_file(self, Message: str) -> None:
         level = Logging.DEBUG
         header = Headers.OK
         self.log_to_file(Header=header, Level=level, Message=Message)
 
-    def warning_to_file(self, Message: str):
+    def warning_to_file(self, Message: str) -> None:
         header = Headers.WARNING
         level = logging.DEBUG
         self.log_to_file(Header=header, Level=level, Message=Message)
 
-    def error_to_file(self, Message: str):
+    def error_to_file(self, Message: str) -> None:
         header = Headers.ERROR
         level = logging.DEBUG
         self.log_to_file(Header=header, Level=level, Message=Message)
 
-    def critical_to_file(self, Message: str):
+    def critical_to_file(self, Message: str) -> None:
         header = Headers.CRITICAL
         level = logging.DEBUG
         self.log_to_file(Header=header, Level=level, Message=Message)
 
-    def warning_to_terminal(self, Message: str):
+    def warning_to_terminal(self, Message: str) -> None:
         header = Headers.WARNING
         color = Colors.YELLOW
         style = Styles.BOLD
         self.log_to_terminal(Message=Message, Header=header, Color=color, Style=style)
 
-    def error_to_terminal(self, Message: str):
+    def error_to_terminal(self, Message: str) -> None:
         header = Headers.ERROR
         color = Colors.RED
         style = Styles.BOLD
         self.log_to_terminal(Message=Message, Header=header, Color=color, Style=style)
 
-    def critical_to_terminal(self, Message: str):
+    def critical_to_terminal(self, Message: str) -> None:
         header = Headers.CRITICAL
         color = Colors.RED
         style = Styles.BOLD
         self.log_to_terminal(Message=Message, Header=header, Color=color, Style=style)
 
-    def ok_to_terminal(self, Message: str):
+    def ok_to_terminal(self, Message: str) -> None:
         header = Headers.OK
         color = Colors.BLUE
         style = Styles.BOLD
         self.log_to_terminal(Message=Message, Header=header, Color=color, Style=style)
 
-    def info_to_terminal(self, Message: str):
+    def info_to_terminal(self, Message: str) -> None:
         header = Headers.INFO
         color = Colors.CYAN
         style = Styles.BOLD
         self.log_to_terminal(Message=Message, Header=header, Color=color, Style=style)
 
-    def ok(self, Message: str):
+    def ok(self, Message: str) -> Optional[int]:
         """Logs [OK] messages to either the terminal or file depending on self.level"""
         if not self.enabled:
             return 1
@@ -266,7 +266,7 @@ class Log:
         else:
             self.ok_to_terminal(Message)
 
-    def error(self, Message: str):
+    def error(self, Message: str) -> Optional[int]:
         """Logs [ERROR] messages to either the terminal or file depending on self.level"""
         if not self.enabled:
             return 1
@@ -275,7 +275,7 @@ class Log:
         else:
             self.error_to_terminal(Message)
 
-    def info(self, Message: str):
+    def info(self, Message: str) -> Optional[int]:
         """Logs [INFO] messages to either the terminal or file depending on self.level"""
         if not self.enabled:
             return 1
@@ -284,7 +284,7 @@ class Log:
         else:
             self.info_to_terminal(Message)
 
-    def warning(self, Message: str):
+    def warning(self, Message: str) -> Optional[int]:
         """Logs [WARNING] messages to either the terminal or file depending on self.level"""
         if not self.enabled:
             return 1
@@ -293,7 +293,7 @@ class Log:
         else:
             self.warning_to_terminal(Message)
 
-    def critical(self, Message: str):
+    def critical(self, Message: str) -> Optional[int]:
         """Logs [CRITICAL] messages to either the terminal or file depending on self.level"""
         if not self.enabled:
             return 1
