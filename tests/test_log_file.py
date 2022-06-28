@@ -75,7 +75,7 @@ class TestLogging:
     """
 
     def test_set_log_level(self):
-        log = logger.Log(Name=log_name, Level=0)
+        log = logger.Log(Name=log_name)
         # test 0 flags
         assert log.level == 0
         assert log.save_info is False
@@ -86,7 +86,7 @@ class TestLogging:
         #check error when trying to set log level above 0 without file_path set.
         assert log.set_log_level(1) is False
         # test 1 flags
-        assert log.set_log_file("test_log.log") is True
+        assert log.set_log_file("./tests/test_log.log") is True
         assert log.set_log_level(1) is True
         assert log.level == 1
         assert log.save_critical is True

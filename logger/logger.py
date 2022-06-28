@@ -153,7 +153,7 @@ class Log:
                 return True
             else:
                 self.error(
-                    f"The specified file path is not an existing file. Please create it to set the new log path."
+                    f"The specified file path {FilePath} is not an existing file. Please create it to set the new log path."
                 )
         except Exception as e:
             self.error(f"An error occurred while setting the log file: {e}")
