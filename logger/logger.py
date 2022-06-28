@@ -102,6 +102,7 @@ class Log:
             self.error(
                 "No FilePath has been specified for this log. Please use set_log_file(FilePath) to set a file path then call this function."
             )
+            return False
 
         if Level >= 0 and Level <= 4:
             # reset the save flags
