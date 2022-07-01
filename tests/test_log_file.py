@@ -1,7 +1,7 @@
 """ Tests for getting/setting log files. """
 import logging
 
-from logger import logger
+from src.logger import logger
 
 log_path = "tests/test_log.log"
 log_name = "Test Logger"

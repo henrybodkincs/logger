@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logger_henryriveracs"
+version = "0.3.0"
+authors = [
+  { name="Henry Rivera", email="henry@wheatrevolution.com" },
+]
+description = "A native python3 logging module for quickly setting up and managing logs."
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/henryriveraCS/logger"
+"Bug Tracker" = "https://github.com/henryriveraCS/logger/issues"
