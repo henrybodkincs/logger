@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/henryriveraCS/logger/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/henryriveraCS/logger/actions/workflows/run-tests.yaml)
 
-An easy-to-use logger class that can intelligently handle pushing stdout messages between files/terminals based off configured options. Extremely useful for setting up a whole <code>logger.Logging()</code> instance without worrying about configuring format/file-handling for scripts/applications.
+An easy-to-use logger class built using python3's native <code>logger</code> library. It can intelligently handle pushing stdout messages between files/terminals based off configured options. Extremely useful for setting up a whole <code>logger.Logging()</code> instance without worrying about configuring format/file-handling for scripts/applications.
 
 <h2>Features</h2>
 <ul>
@@ -22,25 +22,13 @@ An easy-to-use logger class that can intelligently handle pushing stdout message
   
 </ul>
 <h2>Installation</h2>
-<ol>
-  <li><p><code>git clone https://github.com/henryriveraCS/logger</code></p></li>
-  <li>
-    <p>
-      Move <code>logger/logger.py</code> into your project directory
-    </p>
-  </li>
-  <li>
-    <p>
-      Because we don't use any third party libraries the installation is done :^)
-    </p>
-  </li>
-</ol>
+<p><code>pip3 install logger-henryriveracs==0.3.0</code> OR copy <code>src/logger/logger.py</code> into your repository. </p>
 
 <h2>Usage</h2>
 
 ```python
 #python3
-from logger import Log
+from logger.logger import Log
 items = ["item1", "item2", "item3", "item4", "item5"]
 
 my_logger = Log(Name="My Logger")
