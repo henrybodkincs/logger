@@ -11,7 +11,7 @@ authors = [
 description = "A native python3 logging module for quickly setting up and managing logs."
 readme = "README.md"
 license = { file="LICENSE" }
-requires-python = ">=3.10"
+requires-python = ">=3.6"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
