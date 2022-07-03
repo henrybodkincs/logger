@@ -21,7 +21,7 @@ An easy-to-use logger class built using python3's native <code>logger</code> lib
   <li>Enable/Disable logging as needed.</li>
   
 </ul>
-<h2>Installation</h2>
+<h2>Installation(Requires python >= 3.10)</h2>
 <p><code>pip3 install logger-henryriveracs==0.3.0</code> OR copy <code>src/logger/logger.py</code> into your repository. </p>
 
 <h2>Usage</h2>
