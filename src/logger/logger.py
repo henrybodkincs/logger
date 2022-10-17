@@ -208,7 +208,7 @@ class Log:
         self.log_to_file(Header=header, Level=level, Message=Message)
 
     def ok_to_file(self, Message: str) -> None:
-        level = Logging.DEBUG
+        level = logging.DEBUG
         header = Headers.OK
         self.log_to_file(Header=header, Level=level, Message=Message)
 
